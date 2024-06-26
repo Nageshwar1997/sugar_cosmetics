@@ -1,3 +1,4 @@
+import MiddleNavbar from "./MiddleNavbar";
 import TopNavbar from "./TopNavbar";
 
 const Header = () => {
@@ -6,7 +7,7 @@ const Header = () => {
       {/* Top Nav */}
       <TopNavbar />
       {/* Middle Nav */}
-      <div className="w-full h-[72px] bg-red-200">Middle</div>
+      <MiddleNavbar />
       {/* Bottom Nav */}
       <div className="w-full h-[53px] bg-red-300">Bottom</div>
     </div>
