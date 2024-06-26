@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Nordstrom_Rack_Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Frontend Installation
 
-## Available Scripts
+### CRA - Create React App
 
-In the project directory, you can run:
+`npx create-react-app frontend`
 
-### `npm start`
+### Tailwind CSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`npm install -D tailwindcss`
+`npx tailwindcss init`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}`
 
-### `npm test`
+### React Router DOM
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm install react-router-dom`
 
-### `npm run build`
+### React Icons
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`npm install react-icons --save`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Install Toast
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm i react-toastify`
 
-### `npm run eject`
+### Install React Redux Toolkit
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+`npm install @reduxjs/toolkit`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Install React Redux
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`npm i react-redux`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Install MomentJS
 
-## Learn More
+`npm install moment --save`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Install React Stripe JS
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm install --save @stripe/react-stripe-js @stripe/stripe-js`
 
-### Code Splitting
+<!-- Backend Installation -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Backend Installation
 
-### Analyzing the Bundle Size
+### Install Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+`npm init`
 
-### Making a Progressive Web App
+replace package.json with below text
+`{
+"name": "backend",
+"version": "1.0.0",
+"description": "",
+"main": "index.js",
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1",
+"start": "node index.js",
+"dev": "nodemon index.js"
+},
+"author": "",
+"license": "ISC"
+}`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Install nodemon, express, cors, dotenv, mongoose
 
-### Advanced Configuration
+`npm i nodemon express cors dotenv mongoose`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Install MongoDB
 
-### Deployment
+`npm install mongodb`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Run Server
+`npm run dev`
 
-### `npm run build` fails to minify
+### Install bcrypt
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`npm i bcryptjs`
+
+### Install JSON Web Token
+
+`npm i jsonwebtoken`
+
+### Install Cookie-Parser
+
+`npm i cookie-parser`
+
+### Install Stripe
+
+`npm install --save stripe`
