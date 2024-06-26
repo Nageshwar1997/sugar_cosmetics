@@ -35,7 +35,7 @@ const TopNavbar = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [topNavLeftTextLinks.length]);
   return (
     <div className="w-full h-[36px]" style={backgroundImageStyle}>
       <div className="flex justify-center items-center w-full h-full">
