@@ -3,13 +3,13 @@ import TopNavbar from "./TopNavbar";
 
 const Header = () => {
   return (
-    <div className="w-full h-40">
+    <div className="w-full h-40 shadow-md">
       {/* Top Nav */}
       <TopNavbar />
       {/* Middle Nav */}
       <MiddleNavbar />
       {/* Bottom Nav */}
-      <div className="w-full h-[53px] bg-red-300">Bottom</div>
+      <div className="w-full h-[53px] bg-[#141414] text-white">Bottom</div>
     </div>
   );
 };

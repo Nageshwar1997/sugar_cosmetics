@@ -19,7 +19,7 @@ const MiddleNavbar = () => {
             placeholder="Search for products, brands and more"
           />
         </div>
-        <div className=" cursor-pointer flex items-center px-2 space-x-1 font-semibold text-lg rounded-r-lg text-black bg-white h-full">
+        <div className="cursor-pointer flex items-center px-2 space-x-1 font-semibold text-lg rounded-r-lg text-black bg-white h-full">
           <IoSearch size={20} />
           <p>Search</p>
         </div>
