@@ -5,7 +5,6 @@ import LoginRegisterPageBackGroundHi from "../assets/loginRegisterPageBackGround
 import LoginBackgroundImage from "../assets/navbarBackgroundImage.png";
 
 import { Link } from "react-router-dom";
-import { HiMiniArrowLongLeft } from "react-icons/hi2";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 const Login = () => {
