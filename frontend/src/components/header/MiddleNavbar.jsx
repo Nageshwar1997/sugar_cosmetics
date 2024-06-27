@@ -1,15 +1,18 @@
 import Logo from "./Logo";
-import { FaCircleUser } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { LuBadgePercent } from "react-icons/lu";
 import { PiBagBold } from "react-icons/pi";
 import { IoSearch } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const MiddleNavbar = () => {
   return (
     <div className="w-full h-[72px] bg-black flex text-white justify-between items-center px-16">
       <div className="w-md cursor-pointer">
-        <Logo />
+        <Link to={"/"}>
+          <Logo />
+        </Link>
       </div>
       <div className="flex items-center pl-2 border bg-[#212121] border-solid border-white w-[45%] h-10 rounded-lg">
         <div className="w-full h-full">
@@ -24,10 +27,15 @@ const MiddleNavbar = () => {
           <p>Search</p>
         </div>
       </div>
-      <div className="flex items-center space-x-2 cursor-pointer text-lg">
-        <FaCircleUser size={20} />
+      <Link
+        to={"/login"}
+        className="flex items-center space-x-1.5 cursor-pointer text-lg"
+      >
+        <div className="bg-white text-black rounded-full p-1 text-sm">
+          <FaUser />
+        </div>
         <p className="hover:text-pink-600">Login/Register</p>
-      </div>
+      </Link>
       <div className="flex items-center space-x-4 text-xl font-bold">
         <div className="cursor-pointer hover:text-pink-700">
           <FaRegHeart size={23} />

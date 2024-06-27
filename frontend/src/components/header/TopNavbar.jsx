@@ -41,7 +41,7 @@ const TopNavbar = () => {
       className="hidden md:block w-full h-[36px]"
       style={backgroundImageStyle}
     >
-      <div className="flex justify-center items-center w-full h-full sm:text-xs">
+      <div className="flex justify-center items-center w-full h-full text-xs md:text-[16px]">
         <div className="relative flex-1 w-full h-[25px] overflow-hidden flex items-center justify-self-start text-white">
           {topNavLeftTextLinks.map((link, index) => (
             <div
