@@ -6,6 +6,7 @@ import LoginBackgroundImage from "../assets/navbarBackgroundImage.png";
 
 import { Link } from "react-router-dom";
 import { HiMiniArrowLongLeft } from "react-icons/hi2";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 const Login = () => {
   const BackgroundTextureStyle = {
@@ -34,16 +35,16 @@ const Login = () => {
       <div className="w-[62%] h-full relative" style={BackgroundTextureStyle}>
         <Link
           to={"/"}
-          className="flex justify-center items-center w-10 h-10 absolute top-4 left-4 text-4xl hover:text-pink-700 cursor-pointer transition-all animate-bounce"
+          className="flex justify-center items-center w-10 h-10 absolute top-4 left-4 text-2xl hover:text-pink-700 cursor-pointer transition-all animate-ping-1.5s"
         >
-          <HiMiniArrowLongLeft />
+          <FaArrowLeftLong />
         </Link>
         <div className="w-full h-full p-10">
           <div className="p-2 max-w-md h-52 mx-auto text-center flex flex-col space-y-3">
             <div className="flex justify-center w-full h-full">
               <img src={LoginRegisterPageBackGroundHi} alt="Hi" />
             </div>
-            <p className="text-lg font-bold text-[#212121]">
+            <p className="text-lg font-bold text-slate-700">
               Login Using Email/Phone Number
             </p>
           </div>
@@ -83,20 +84,24 @@ const Login = () => {
                 </label>
               </div>
             </div>
-            <div
+            <Link
+              to={"/"}
               className="w-full h-[20%] border-2 border-[#bcb9b9] flex items-center justify-center rounded-lg"
               style={LoginBackgroundStyle}
             >
               <button className="w-full h-full rounded-md px-3 outline-none border-none text-white font-bold text-lg">
                 Login
               </button>
-            </div>
-            <div className="w-full flex justify-between px-2">
+            </Link>
+            <div className="w-full flex justify-between px-2 text-slate-700">
               <p>
                 Don't have an account?{" "}
-                <span className="cursor-pointer text-pink-600 hover:text-pink-700 hover:underline">
+                <Link
+                  to={"/register"}
+                  className="cursor-pointer text-pink-600 hover:text-pink-700 hover:underline"
+                >
                   Register
-                </span>
+                </Link>
               </p>
               <p className="cursor-pointer hover:text-pink-700 hover:underline">
                 Forgot Password?
