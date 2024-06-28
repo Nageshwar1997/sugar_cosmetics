@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import BackgroundTexture from "../assets/loginRegisterPageBackGroundTexture.jpeg";
 import RegisterLoginBanner from "../assets/loginRegisterBanner.jpg";
 import RegisterBackgroundImage from "../assets/navbarBackgroundImage.png";
 import RegisterSugarLogo from "../assets/SLogo.png";
-
 import { Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import imageToBase_64 from "../helpers/imageToBase_64";
+import SummaryApi from "../common";
 
 const Register = () => {
-  // Styles
   const BackgroundTextureStyle = {
     backgroundImage: `url(${BackgroundTexture})`,
     backgroundRepeat: "no-repeat",
@@ -25,7 +25,6 @@ const Register = () => {
     backgroundSize: "cover",
   };
 
-  // States
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [userDetails, setUserDetails] = useState({
@@ -38,31 +37,101 @@ const Register = () => {
     profilePic: "",
   });
 
-const handleInputChange = async (e) => {
-  const { name, value, type, files } = e.target;
+  const handleInputChange = async (e) => {
+    const { name, value, type, files } = e.target;
 
-  if (type === "file" && files && files.length > 0) {
-    const selectedImageFile = files[0];
-    const base_64_image = await imageToBase_64(selectedImageFile);
+    let newValue = value;
+
+    if (type === "file") {
+      const selectedImageFile = files[0];
+      newValue = await imageToBase_64(selectedImageFile);
+    }
+
+    if (name === "phone") {
+      newValue = value.replace(/\D/g, "").slice(0, 10);
+    }
+
+    if (
+      [
+        "firstName",
+        "lastName",
+        "email",
+        "password",
+        "confirmPassword",
+      ].includes(name)
+    ) {
+      newValue = value.replace(/\s/g, "");
+    }
 
     setUserDetails((prevDetails) => ({
       ...prevDetails,
-      [name]: base_64_image,
+      [name]: newValue,
     }));
-  } else {
-    setUserDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: type === "number" ? +value : value,
-    }));
-  }
-};
-
-  console.log(userDetails);
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log(userDetails);
   };
+
+  const handleKeyPress = (e) => {
+    const { charCode } = e;
+
+    if (charCode < 48 || charCode > 57) {
+      e.preventDefault();
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (!userDetails.firstName) {
+      toast.error("First Name Not Provided");
+      return;
+    }
+
+    if (!userDetails.lastName) {
+      toast.error("Last Name Not Provided");
+      return;
+    }
+    
+    if (userDetails.phone.toString().length !== 10) {
+      toast.error("Invalid Phone Number");
+      return;
+    }
+    
+    if (userDetails.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
+
+    if (userDetails.password !== userDetails.confirmPassword) {
+      toast.error("Password & Confirm Password do not match");
+      return;
+    }
+
+    try {
+      const newUserDetails = {
+        ...userDetails,
+        phone: +userDetails.phone,
+      };
+      const response = await fetch(SummaryApi.registerUser.url, {
+        method: SummaryApi.registerUser.method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUserDetails),
+      });
+
+      const responseData = await response.json();
+
+      console.log("ResponseData", responseData);
+      if (responseData.success) {
+        toast.success(responseData.message);
+      } else {
+        toast.error(responseData.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+      console.log("Error", error);
+    }
+  };
+
 
   return (
     <section id="register" className="w-full h-[100vh] flex">
@@ -126,7 +195,6 @@ const handleInputChange = async (e) => {
                     className="w-full h-full rounded-md px-2 outline-none border-none caret-pink-600 bg-transparent shadow-md"
                     value={userDetails.firstName}
                     onChange={handleInputChange}
-                    required
                   />
                   <label
                     htmlFor="firstName"
@@ -146,7 +214,6 @@ const handleInputChange = async (e) => {
                     className="w-full h-full rounded-md px-2 outline-none border-none caret-pink-600 bg-transparent shadow-md"
                     value={userDetails.lastName}
                     onChange={handleInputChange}
-                    required
                   />
                   <label
                     htmlFor="lastName"
@@ -164,14 +231,14 @@ const handleInputChange = async (e) => {
                   <hr className="w-[1px] ml-1 h-1/2 bg-slate-500" />
                 </div>
                 <input
-                  type="number"
+                  type="text"
                   id="phone"
                   name="phone"
                   placeholder="Ex. 1234567890"
                   className="w-full h-full rounded-md pl-1 outline-none border-none caret-pink-600 bg-transparent shadow-md"
                   value={userDetails.phone}
                   onChange={handleInputChange}
-                  required
+                  onKeyPress={handleKeyPress}
                 />
 
                 <label
@@ -185,14 +252,13 @@ const handleInputChange = async (e) => {
             <div className="w-full h-10 border-2 border-[#bcb9b9] focus-within:border-pink-400 flex items-center justify-center rounded-lg">
               <div className="relative w-full h-full flex justify-center items-center">
                 <input
-                  type="email"
+                  type="text"
                   id="email"
                   name="email"
                   placeholder="Ex. sample@gmail.com"
                   className="w-full h-full rounded-md px-2 outline-none border-none caret-pink-600 bg-transparent shadow-md"
                   value={userDetails.email}
                   onChange={handleInputChange}
-                  required
                 />
 
                 <label
@@ -213,7 +279,7 @@ const handleInputChange = async (e) => {
                   className="w-full h-full rounded-md px-2 outline-none border-none caret-pink-600 bg-transparent shadow-md"
                   value={userDetails.password}
                   onChange={handleInputChange}
-                  required
+                  autoComplete="off"
                 />
                 <div className="w-10 h-full flex justify-center items-center cursor-pointer hover:text-pink-700 text-lg">
                   <span
@@ -241,7 +307,7 @@ const handleInputChange = async (e) => {
                   className="w-full h-full rounded-md px-2 outline-none border-none caret-pink-600 bg-transparent shadow-md"
                   value={userDetails.confirmPassword}
                   onChange={handleInputChange}
-                  required
+                  autoComplete="off"
                 />
                 <div className="w-10 h-full flex justify-center items-center cursor-pointer hover:text-pink-700 text-lg">
                   <span

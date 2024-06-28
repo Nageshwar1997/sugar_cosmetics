@@ -6,27 +6,6 @@ async function userRegisterController(req, res) {
     const { email, phone, password, firstName, lastName } = req.body;
 
     // Validate input fields
-    if (!email) {
-      return res.status(400).json({
-        message: "Please Provide Valid Email",
-        error: true,
-        success: false,
-      });
-    }
-    if (!phone) {
-      return res.status(400).json({
-        message: "Please Provide Valid Phone Number",
-        error: true,
-        success: false,
-      });
-    }
-    if (!password) {
-      return res.status(400).json({
-        message: "Please Provide Valid Password",
-        error: true,
-        success: false,
-      });
-    }
     if (!firstName) {
       return res.status(400).json({
         message: "Please Provide Valid First Name",
@@ -34,9 +13,34 @@ async function userRegisterController(req, res) {
         success: false,
       });
     }
+
     if (!lastName) {
       return res.status(400).json({
         message: "Please Provide Valid Last Name",
+        error: true,
+        success: false,
+      });
+    }
+
+    if (!phone) {
+      return res.status(400).json({
+        message: "Please Provide Valid Phone Number",
+        error: true,
+        success: false,
+      });
+    }
+
+    if (!email) {
+      return res.status(400).json({
+        message: "Please Provide Valid Email",
+        error: true,
+        success: false,
+      });
+    }
+
+    if (!password) {
+      return res.status(400).json({
+        message: "Please Provide Valid Password",
         error: true,
         success: false,
       });
