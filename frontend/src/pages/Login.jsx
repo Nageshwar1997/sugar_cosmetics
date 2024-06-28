@@ -63,7 +63,8 @@ const Login = () => {
   }, [selectedLoginOption]);
 
   return (
-    <div className="w-full h-[100vh] flex">
+    <section id="login" className="w-full h-[100vh] flex">
+      {/* Left Section */}
       <div className="w-[38%] object-fill">
         <img
           src={LoginRegisterBanner}
@@ -247,7 +248,7 @@ const Login = () => {
           </>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

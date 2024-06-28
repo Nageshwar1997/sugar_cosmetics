@@ -12,7 +12,7 @@ function App() {
       <Context.Provider value={{}}>
         <ToastContainer position="top-center" autoClose={2000} />
         <Header />
-        <main className="w-full min-h-[calc(100vh-200px)] bg-red-500">
+        <main className="w-full min-h-[calc(100vh-200px)]">
           <Outlet />
         </main>
         <Footer />
