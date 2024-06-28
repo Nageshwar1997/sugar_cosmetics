@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // User Controllers
-const userSignUpController = require("../controllers/user/userSignUp");
+const userRegisterController = require("../controllers/user/userRegister");
 const userSignInController = require("../controllers/user/userSignIn");
 const userDetailsController = require("../controllers/user/userDetails");
 const userLogoutController = require("../controllers/user/userLogout");
@@ -31,9 +31,14 @@ const webHookController = require("../controllers/order/webhook");
 const orderController = require("../controllers/order/order.controller");
 const allOrdersController = require("../controllers/order/allOrders.controller");
 
+
+// Done
+
 // User Routes
-router.post("/signup", userSignUpController);
-router.post("/signin", userSignInController);
+router.post("/register", userRegisterController);
+
+// Remaining
+router.post("/login", userSignInController);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", authToken, userLogoutController);
 
