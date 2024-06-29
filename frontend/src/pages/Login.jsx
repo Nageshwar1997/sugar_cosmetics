@@ -40,7 +40,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { fetchCurrentUserDetails } = useContext(Context);
 
-  // console.log("Current User Context : ", fetchCurrentUserDetails());
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
 
@@ -49,7 +48,6 @@ const Login = () => {
       [name]: type === "number" ? +value : value,
     }));
   };
-  console.log(loginDetails);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -67,20 +65,21 @@ const Login = () => {
       const responseData = await response.json();
 
       if (responseData.success) {
+        sessionStorage.setItem("token", responseData.data); // Assuming token is part of responseData
+        const tokenExpiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
+        sessionStorage.setItem("tokenExpiry", tokenExpiry.getTime().toString());
+
         toast.success(responseData.message);
         navigate("/");
         fetchCurrentUserDetails();
-      }
-      if (responseData.error) {
+      } else {
         toast.error(responseData.message);
       }
     } catch (error) {
       toast.error(error.message);
-      console.log(error);
     }
   };
 
-  // console.log(loginDetails);
   useEffect(() => {
     if (selectedLoginOption === "email") {
       setLoginDetails((prevDetails) => ({
