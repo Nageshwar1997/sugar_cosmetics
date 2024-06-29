@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BackgroundTexture from "../assets/loginRegisterPageBackGroundTexture.jpeg";
 import LoginRegisterBanner from "../assets/loginRegisterBanner.jpg";
 import LoginRegisterPageBackGroundHi from "../assets/loginRegisterPageBackGroundHi.jpeg";
@@ -10,6 +10,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SummaryApi from "../common";
 
 import { toast } from "react-toastify";
+import Context from "../contexts";
 
 const Login = () => {
   // Styles
@@ -37,7 +38,9 @@ const Login = () => {
   const [selectedLoginOption, setSelectedLoginOption] = useState("email");
 
   const navigate = useNavigate();
+  const { fetchCurrentUserDetails } = useContext(Context);
 
+  // console.log("Current User Context : ", fetchCurrentUserDetails());
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
 
@@ -66,6 +69,7 @@ const Login = () => {
       if (responseData.success) {
         toast.success(responseData.message);
         navigate("/");
+        fetchCurrentUserDetails();
       }
       if (responseData.error) {
         toast.error(responseData.message);
@@ -76,7 +80,7 @@ const Login = () => {
     }
   };
 
-  console.log(loginDetails);
+  // console.log(loginDetails);
   useEffect(() => {
     if (selectedLoginOption === "email") {
       setLoginDetails((prevDetails) => ({

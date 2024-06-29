@@ -70,7 +70,7 @@ async function userLoginController(req, res) {
     // Response with token and user data
     res.cookie("token", token, tokenOptions).status(200).json({
       message: "Login successfully!",
-      data: { token, user },
+      data: token,
       success: true,
       error: false,
     });
