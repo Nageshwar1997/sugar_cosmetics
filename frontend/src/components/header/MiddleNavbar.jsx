@@ -5,8 +5,12 @@ import { LuBadgePercent } from "react-icons/lu";
 import { PiBagBold } from "react-icons/pi";
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MiddleNavbar = () => {
+  const user = useSelector((state) => state?.user?.user);
+
+  console.log("user", user);
   return (
     <div className="w-full h-[72px] bg-black flex text-white justify-between items-center px-16">
       <div className="w-md cursor-pointer">
@@ -32,9 +36,19 @@ const MiddleNavbar = () => {
         className="flex items-center space-x-1.5 cursor-pointer text-lg"
       >
         <div className="bg-white text-black rounded-full p-1 text-sm">
-          <FaUser />
+          {user?.profilePic ? (
+            <img
+              src={user?.profilePic}
+              alt={user?.firstName}
+              className="w-8 h-8 rounded-full"
+            />
+          ) : (
+            <FaUser />
+          )}
         </div>
-        <p className="hover:text-pink-600">Login/Register</p>
+        <p className="hover:text-pink-600">
+          {user?._id ? `Hi ${user?.firstName}` : "Login/Register"}
+        </p>
       </Link>
       <div className="flex items-center space-x-4 text-xl font-bold">
         <div className="cursor-pointer hover:text-pink-700">
