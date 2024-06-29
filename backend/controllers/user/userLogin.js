@@ -2,33 +2,35 @@ const bcrypt = require("bcryptjs");
 const userModel = require("../../models/userModel");
 const jwt = require("jsonwebtoken");
 
-async function userSignInController(req, res) {
+async function userLoginController(req, res) {
   try {
-    const { email, password } = req.body;
+    const { email, phone, password } = req.body;
 
-    if (!email) {
-      throw new Error("Please Provide Valid Email");
+    if (!email && !phone) {
+      throw new Error("Please Provide Valid Email/Phone Number");
     }
     if (!password) {
       throw new Error("Please Provide Valid Password");
     }
 
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne(email ? { email } : { phone });
 
     if (!user) {
       throw new Error("User Not Found...!");
     }
 
     const checkPassword = await bcrypt.compare(password, user.password);
-    // console.log("Check Password", checkPassword);
+    console.log("Check Password", checkPassword);
     if (checkPassword) {
       const tokenData = {
         _id: user._id,
-        email: user.email,
+        [email ? "email" : "phone"]: email ? user.email : user.phone,
       };
       const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, {
-        expiresIn: 60 * 60 * 12,
+        expiresIn: 60 * 60 * 24 * 30,
       });
+
+      console.log("Token", token);
 
       const tokenOption = {
         httpOnly: true,
@@ -37,7 +39,7 @@ async function userSignInController(req, res) {
       };
       res.cookie("token", token, tokenOption).status(200).json({
         message: "Login Successfully...!",
-        data: token,
+        data: { token, user },
         success: true,
         error: false,
       });
@@ -53,4 +55,4 @@ async function userSignInController(req, res) {
   }
 }
 
-module.exports = userSignInController;
+module.exports = userLoginController;

@@ -3,7 +3,7 @@ const router = express.Router();
 
 // User Controllers
 const userRegisterController = require("../controllers/user/userRegister");
-const userSignInController = require("../controllers/user/userSignIn");
+const userLoginController = require("../controllers/user/userLogin");
 const userDetailsController = require("../controllers/user/userDetails");
 const userLogoutController = require("../controllers/user/userLogout");
 const allUsersController = require("../controllers/user/allUsers");
@@ -36,9 +36,9 @@ const allOrdersController = require("../controllers/order/allOrders.controller")
 
 // User Routes
 router.post("/register", userRegisterController);
+router.post("/login", userLoginController);
 
 // Remaining
-router.post("/login", userSignInController);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", authToken, userLogoutController);
 

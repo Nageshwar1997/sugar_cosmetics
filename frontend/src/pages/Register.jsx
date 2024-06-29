@@ -4,7 +4,7 @@ import BackgroundTexture from "../assets/loginRegisterPageBackGroundTexture.jpeg
 import RegisterLoginBanner from "../assets/loginRegisterBanner.jpg";
 import RegisterBackgroundImage from "../assets/navbarBackgroundImage.png";
 import RegisterSugarLogo from "../assets/SLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import imageToBase_64 from "../helpers/imageToBase_64";
@@ -37,6 +37,8 @@ const Register = () => {
     profilePic: "",
   });
 
+  const navigate = useNavigate();
+
   const handleInputChange = async (e) => {
     const { name, value, type, files } = e.target;
 
@@ -44,7 +46,12 @@ const Register = () => {
 
     if (type === "file") {
       const selectedImageFile = files[0];
-      newValue = await imageToBase_64(selectedImageFile);
+      if (selectedImageFile) {
+        newValue = await imageToBase_64(selectedImageFile);
+      }
+      else {
+        return;
+      }
     }
 
     if (name === "phone") {
@@ -123,6 +130,7 @@ const Register = () => {
       console.log("ResponseData", responseData);
       if (responseData.success) {
         toast.success(responseData.message);
+        navigate("/login");
       } else {
         toast.error(responseData.message);
       }
@@ -147,7 +155,7 @@ const Register = () => {
       <div className="w-[62%] h-full relative" style={BackgroundTextureStyle}>
         <Link
           to={"/login"}
-          className="flex justify-center items-center w-10 h-10 absolute top-4 left-4 text-2xl text-slate-600 hover:text-pink-700 cursor-pointer transition-all animate-ping duration-[1500ms]"
+          className="flex justify-center items-center w-10 h-10 absolute top-4 left-4 text-2xl text-slate-600 hover:text-pink-700 cursor-pointer"
         >
           <FaArrowLeftLong />
         </Link>

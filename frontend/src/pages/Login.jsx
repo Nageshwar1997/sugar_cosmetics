@@ -4,9 +4,12 @@ import LoginRegisterBanner from "../assets/loginRegisterBanner.jpg";
 import LoginRegisterPageBackGroundHi from "../assets/loginRegisterPageBackGroundHi.jpeg";
 import LoginBackgroundImage from "../assets/navbarBackgroundImage.png";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SummaryApi from "../common";
+
+import { toast } from "react-toastify";
 
 const Login = () => {
   // Styles
@@ -33,6 +36,8 @@ const Login = () => {
   });
   const [selectedLoginOption, setSelectedLoginOption] = useState("email");
 
+  const navigate = useNavigate();
+
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
 
@@ -43,11 +48,35 @@ const Login = () => {
   };
   console.log(loginDetails);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(loginDetails);
+
+    try {
+      const response = await fetch(SummaryApi.loginUser.url, {
+        method: SummaryApi.loginUser.method,
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginDetails),
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        toast.success(responseData.message);
+        navigate("/");
+      }
+      if (responseData.error) {
+        toast.error(responseData.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+      console.log(error);
+    }
   };
 
+  console.log(loginDetails);
   useEffect(() => {
     if (selectedLoginOption === "email") {
       setLoginDetails((prevDetails) => ({
