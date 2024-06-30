@@ -34,7 +34,7 @@ const MiddleNavbar = () => {
     }
   };
 
-  console.log("user", user);
+  // console.log("user", user);
 
   // for logout dropdown
   const dropdownRef = useRef(null); // for logout dropdown

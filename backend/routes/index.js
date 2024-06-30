@@ -40,10 +40,12 @@ router.post("/login", userLoginController);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/logout", authToken, userLogoutController);
 
-// Remaining
+// Master Admin Routes
+router.get("/all-users", authToken, allUsersController);
 
 // Admin Panel Routes
-router.get("/all-users", authToken, allUsersController);
+
+// Remaining
 router.post("/update-user", authToken, updateUserController);
 router.get("/all-orders", authToken, allOrdersController);
 

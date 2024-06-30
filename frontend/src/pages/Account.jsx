@@ -17,10 +17,10 @@ import { IoIosArrowForward } from "react-icons/io";
 import { MdLocationPin } from "react-icons/md";
 import JoinClubImage from "../assets/logo.gif";
 import PremiumLogo from "../assets/account/premiumLogo.png";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 const Account = () => {
   const user = useSelector((state) => state?.user?.user);
-  console.log("user", user);
+  // console.log("user", user);
   const LeftTopBackgroundTextureStyle = {
     backgroundImage: `url(${LeftTopTexture})`,
     backgroundRepeat: "no-repeat",
@@ -34,7 +34,7 @@ const Account = () => {
     backgroundSize: "cover",
   };
   return (
-    <div className="w-[92.8%] mx-[3.6%] my-[1.5%] flex justify-between gap-[1.4%] overflow-y-scroll">
+    <div className="w-[95%] mx-[3.6%] my-[1.5%] flex justify-between gap-[1.4%] overflow-y-scroll">
       {/* Left */}
       <div className="w-[23.9%]">
         <div
@@ -112,7 +112,10 @@ const Account = () => {
             style={{ boxShadow: "0 2px 10px hsla(0, 0%, 51%, .1)" }}
           >
             <>
-              <Link to={"products"} className="flex items-center justify-between p-4 text-black text-lg cursor-pointer border border-slate-400 rounded-md hover:shadow-md">
+              <Link
+                to={"products"}
+                className="flex items-center justify-between p-4 text-black text-lg cursor-pointer border border-slate-400 rounded-md hover:shadow-md"
+              >
                 <div
                   className="font-normal text-[16px] flex gap-2 text-lg"
                   style={{ lineHeight: "19px" }}
@@ -126,7 +129,10 @@ const Account = () => {
                   <IoIosArrowForward />
                 </div>
               </Link>
-              <Link to={"users"} className="flex items-center justify-between p-4 text-black text-lg cursor-pointer border border-slate-400 rounded-md hover:shadow-md">
+              <Link
+                to={"users"}
+                className="flex items-center justify-between p-4 text-black text-lg cursor-pointer border border-slate-400 rounded-md hover:shadow-md"
+              >
                 <div
                   className="font-normal text-[16px] flex gap-2 text-lg"
                   style={{ lineHeight: "19px" }}
@@ -241,7 +247,9 @@ const Account = () => {
         </div>
       </div>
       {/* Right */}
-      <div className="bg-red-400 w-[74.66%] h-[514px]"></div>
+      <main className="w-[74.66%] h-full">
+        <Outlet />
+      </main>
     </div>
   );
 };
