@@ -38,9 +38,9 @@ const allOrdersController = require("../controllers/order/allOrders.controller")
 router.post("/register", userRegisterController);
 router.post("/login", userLoginController);
 router.get("/user-details", authToken, userDetailsController);
+router.get("/logout", authToken, userLogoutController);
 
 // Remaining
-router.get("/userLogout", authToken, userLogoutController);
 
 // Admin Panel Routes
 router.get("/all-users", authToken, allUsersController);

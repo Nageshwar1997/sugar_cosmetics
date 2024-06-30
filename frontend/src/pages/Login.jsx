@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import BackgroundTexture from "../assets/loginRegisterPageBackGroundTexture.jpeg";
+import BackgroundTexture from "../assets/textures/loginRegisterPageBackGroundTexture.jpeg";
 import LoginRegisterBanner from "../assets/loginRegisterBanner.jpg";
 import LoginRegisterPageBackGroundHi from "../assets/loginRegisterPageBackGroundHi.jpeg";
 import LoginBackgroundImage from "../assets/navbarBackgroundImage.png";
@@ -65,10 +65,6 @@ const Login = () => {
       const responseData = await response.json();
 
       if (responseData.success) {
-        sessionStorage.setItem("token", responseData.data); // Assuming token is part of responseData
-        const tokenExpiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
-        sessionStorage.setItem("tokenExpiry", tokenExpiry.getTime().toString());
-
         toast.success(responseData.message);
         navigate("/");
         fetchCurrentUserDetails();

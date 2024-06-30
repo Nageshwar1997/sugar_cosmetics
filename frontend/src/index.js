@@ -14,14 +14,14 @@ import ContextProvider from "./contexts/ContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <>
     <ToastContainer position="top-center" autoClose={2000} limit={3} />
     <Provider store={store}>
       <ContextProvider>
         <RouterProvider router={router} />
       </ContextProvider>
     </Provider>
-  </React.StrictMode>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

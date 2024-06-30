@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import BackgroundTexture from "../assets/loginRegisterPageBackGroundTexture.jpeg";
+import BackgroundTexture from "../assets/textures/loginRegisterPageBackGroundTexture.jpeg";
 import RegisterLoginBanner from "../assets/loginRegisterBanner.jpg";
 import RegisterBackgroundImage from "../assets/navbarBackgroundImage.png";
 import RegisterSugarLogo from "../assets/SLogo.png";

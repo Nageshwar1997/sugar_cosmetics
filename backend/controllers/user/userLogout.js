@@ -14,7 +14,7 @@ async function userLogoutController(req, res) {
     });
   } catch (error) {
     res.status(400).json({
-      message: error.message || error,
+      message: error.message || "An error occurred during logout" || error,
       error: true,
       success: false,
     });
