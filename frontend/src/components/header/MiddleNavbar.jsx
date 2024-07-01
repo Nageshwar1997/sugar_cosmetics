@@ -73,7 +73,7 @@ const MiddleNavbar = () => {
       </div>
       <div className="flex items-center space-x-1 p-1">
         <Link
-          to={`${user?._id ? "/account" : "/login"}`}
+          to={`${user?._id ? "/account/users" : "/login"}`}
           className="flex items-center space-x-1.5 cursor-pointer text-lg"
         >
           <div className="bg-white text-black rounded-full p-1 text-sm">
@@ -99,9 +99,9 @@ const MiddleNavbar = () => {
           <span>{user?._id && <FaAngleDown />}</span>
 
           {showLogout && (
-            <div className="absolute top-7 left-0 bg-white text-slate-700 w-40 rounded-lg hover:bg-slate-800 hover:text-white">
+            <div className="absolute top-8 -right-16 bg-white text-slate-700 w-40 rounded-lg">
               <div
-                className="cursor-pointer text-center p-2 rounded-lg"
+                className="cursor-pointer text-center p-2 rounded-lg hover:bg-slate-200"
                 onClick={handleLogout}
                 onMouseLeave={() => setShowLogout(false)}
               >

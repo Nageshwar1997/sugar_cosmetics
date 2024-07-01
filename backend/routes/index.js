@@ -6,8 +6,8 @@ const userRegisterController = require("../controllers/user/userRegister");
 const userLoginController = require("../controllers/user/userLogin");
 const userDetailsController = require("../controllers/user/userDetails");
 const userLogoutController = require("../controllers/user/userLogout");
-const allUsersController = require("../controllers/user/allUsers");
-const updateUserController = require("../controllers/user/updateUser");
+const allUsersController = require("../controllers/masterAndAdmin/allUsers");
+const updateUserController = require("../controllers/masterAndAdmin/updateUser");
 const addToCartController = require("../controllers/user/addToCart");
 const countAddToCartController = require("../controllers/user/countAddToCart");
 const addToCartViewController = require("../controllers/user/addToCartView");
@@ -42,11 +42,11 @@ router.get("/logout", authToken, userLogoutController);
 
 // Master Admin Routes
 router.get("/all-users", authToken, allUsersController);
+router.post("/update-user", authToken, updateUserController);
 
 // Admin Panel Routes
 
 // Remaining
-router.post("/update-user", authToken, updateUserController);
 router.get("/all-orders", authToken, allOrdersController);
 
 // Product

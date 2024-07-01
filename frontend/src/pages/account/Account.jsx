@@ -20,7 +20,7 @@ import PremiumLogo from "../../assets/account/premiumLogo.png";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Account = () => {
-  const user = useSelector((state) => state?.user?.user);
+  const currentUser = useSelector((state) => state?.user?.user);
   const { pathname } = useLocation();
 
   const navigationPaths = pathname.split("/");
@@ -86,11 +86,11 @@ const Account = () => {
             >
               <div className="flex flex-col justify-center items-center gap-1 border-r pr-2">
                 <div className="w-14 h-14 rounded-full flex justify-center items-center">
-                  {user?.profilePic ? (
+                  {currentUser?.profilePic ? (
                     <div className="w-full h-full bg-white p-1 rounded-full text-black flex justify-center items-center">
                       <img
-                        src={user?.profilePic}
-                        alt={user?.firstName}
+                        src={currentUser?.profilePic}
+                        alt={currentUser?.firstName}
                         className="w-full h-full rounded-full object-cover"
                       />
                     </div>
@@ -100,17 +100,17 @@ const Account = () => {
                     </div>
                   )}
                 </div>
-                <p className="uppercase">{user?.role}</p>
+                <p className="uppercase">{currentUser?.role}</p>
               </div>
 
               <div className="flex flex-col gap-1 text-slate-200">
                 <p className="capitalize font-semibold">
-                  {user?._id
-                    ? user?.firstName + " " + user?.lastName
+                  {currentUser?._id
+                    ? currentUser?.firstName + " " + currentUser?.lastName
                     : "Sugar Fan"}
                 </p>
-                {user?._id && <p>+91 {user?.phone}</p>}
-                <p className="text-sm">{user?.email}</p>
+                {currentUser?._id && <p>+91 {currentUser?.phone}</p>}
+                <p className="text-sm">{currentUser?.email}</p>
               </div>
             </div>
 
@@ -169,7 +169,12 @@ const Account = () => {
                 </Link>
                 <Link
                   to={"users"}
-                  className="flex items-center justify-between p-4 text-black text-lg cursor-pointer border border-slate-400 rounded-md hover:shadow-md"
+                  className={`${
+                    currentUser?.role === "MASTER" ||
+                    currentUser?.role === "ADMIN"
+                      ? "flex"
+                      : "hidden"
+                  } items-center justify-between p-4 text-black text-lg cursor-pointer border border-slate-400 rounded-md hover:shadow-md`}
                 >
                   <div
                     className="font-normal text-[16px] flex gap-2 text-lg"
@@ -184,6 +189,7 @@ const Account = () => {
                     <IoIosArrowForward />
                   </div>
                 </Link>
+
                 <nav className="flex items-center justify-between p-4 text-black text-lg cursor-pointer border border-slate-400 rounded-md hover:shadow-md">
                   <div
                     className="font-normal text-[16px] flex gap-2 text-lg"
@@ -285,7 +291,7 @@ const Account = () => {
           </div>
         </div>
         {/* Right */}
-        <main className="w-[74.66%] h-[calc(100vh-200px)] flex flex-col justify-between items-center bg-red-600">
+        <main className="w-[74.66%] h-[calc(100vh-200px)] flex flex-col justify-between items-center">
           <Outlet />
         </main>
       </div>

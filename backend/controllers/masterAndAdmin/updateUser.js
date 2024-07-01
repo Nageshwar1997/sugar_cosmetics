@@ -12,13 +12,13 @@ async function updateUserController(req, res) {
 
     const user = await userModel.findById(sessionUser);
 
-    // console.log("User Role :", user.role);
+    console.log("User Role :", user.role);
 
-    const updateUser = await userModel.findByIdAndUpdate(userId, payload);
+    const updatedUser = await userModel.findByIdAndUpdate(userId, payload);
 
     res.status(200).json({
       message: "User Updated Successfully",
-      data: updateUser,
+      data: updatedUser,
       error: false,
       success: true,
     });
