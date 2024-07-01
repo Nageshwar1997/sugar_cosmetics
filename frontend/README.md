@@ -99,3 +99,7 @@ replace package.json with below text
 ### Install Stripe
 
 `npm install --save stripe`
+
+### Browser Image Compression
+
+`npm install browser-image-compression`

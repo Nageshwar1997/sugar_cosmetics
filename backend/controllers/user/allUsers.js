@@ -4,8 +4,14 @@ async function allUsersController(req, res) {
   try {
     // console.log("User id", req.userId);
 
-    // const user = await userModel.findById(req.userId);
+    const user = await userModel.findById(req.userId);
     // console.log("User : ",user.name);
+
+    if (user.role !== "MASTER") {
+      return res.status(500).json({
+        message: "Unauthorized Access",
+      });
+    }
 
     const allUsers = await userModel.find({});
 

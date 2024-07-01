@@ -12,3 +12,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   @apply bg-[#f5f5f5];
 }
+
+.scrollbar-none {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* WebKit */
+}

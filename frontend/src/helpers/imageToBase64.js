@@ -1,4 +1,4 @@
-const imageToBase_64 = async (image) => {
+const imageToBase64 = async (image) => {
   const reader = new FileReader();
   reader.readAsDataURL(image);
 
@@ -14,4 +14,4 @@ const imageToBase_64 = async (image) => {
   return imageData;
 };
 
-export default imageToBase_64;
+export default imageToBase64;

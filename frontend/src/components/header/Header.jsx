@@ -1,11 +1,13 @@
+import { useLocation } from "react-router-dom";
 import MiddleNavbar from "./MiddleNavbar";
 import TopNavbar from "./TopNavbar";
 
 const Header = () => {
+  const { pathname } = useLocation();
   return (
-    <div className="w-full h-40 shadow-md">
+    <div className="w-full shadow-md">
       {/* Top Nav */}
-      <TopNavbar />
+      {pathname === "/" && <TopNavbar />}
       {/* Middle Nav */}
       <MiddleNavbar />
       {/* Bottom Nav */}

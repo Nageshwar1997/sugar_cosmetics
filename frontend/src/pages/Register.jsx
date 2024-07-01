@@ -7,7 +7,7 @@ import RegisterSugarLogo from "../assets/SLogo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import imageToBase_64 from "../helpers/imageToBase_64";
+import imageToBase64 from "../helpers/imageToBase64";
 import SummaryApi from "../common";
 
 const Register = () => {
@@ -24,7 +24,7 @@ const Register = () => {
     backgroundPosition: "center",
     backgroundSize: "cover",
   };
-
+  const [showImageSizeWarning, setShowImageSizeWarning] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [userDetails, setUserDetails] = useState({
@@ -47,9 +47,15 @@ const Register = () => {
     if (type === "file") {
       const selectedImageFile = files[0];
       if (selectedImageFile) {
-        newValue = await imageToBase_64(selectedImageFile);
-      }
-      else {
+        try {
+          const base64String = await imageToBase64(selectedImageFile);
+          newValue = base64String;
+        } catch (error) {
+          console.error("Error compressing image:", error);
+          toast.error("Error compressing image. Please try again.");
+          return;
+        }
+      } else {
         return;
       }
     }
@@ -96,12 +102,12 @@ const Register = () => {
       toast.error("Last Name Not Provided");
       return;
     }
-    
+
     if (userDetails.phone.toString().length !== 10) {
       toast.error("Invalid Phone Number");
       return;
     }
-    
+
     if (userDetails.password.length < 6) {
       toast.error("Password must be at least 6 characters long");
       return;
@@ -115,7 +121,7 @@ const Register = () => {
     try {
       const newUserDetails = {
         ...userDetails,
-        phone: +userDetails.phone,
+        phone: userDetails.phone,
       };
       const response = await fetch(SummaryApi.registerUser.url, {
         method: SummaryApi.registerUser.method,
@@ -140,7 +146,6 @@ const Register = () => {
     }
   };
 
-
   return (
     <section id="register" className="w-full h-[100vh] flex">
       {/* Left Section */}
@@ -161,33 +166,43 @@ const Register = () => {
         </Link>
         <div className="w-full h-full px-10 py-3">
           {/* Upload Image Section */}
-          <div className="relative mx-auto rounded-full flex justify-center items-center w-[100px] h-[100px] overflow-hidden bg-white">
-            <label
-              htmlFor="profilePic"
-              className="cursor-pointer w-full h-full"
-            >
-              <div className="w-full h-full flex justify-center items-center">
-                <img
-                  src={userDetails.profilePic || RegisterSugarLogo}
-                  alt="Sugar Logo"
-                  className="rounded-full object-cover w-full h-full"
-                />
-              </div>
-              <form>
-                <div className="text-xs flex justify-center items-center w-full pb-3 bg-slate-200 absolute bottom-0 left-0 text-black rounded-full">
-                  Upload Photo
+          <div className="relative w-full h-auto grid place-items-center">
+            <div className="relative mx-auto rounded-full flex justify-center items-center w-[100px] h-[100px] overflow-hidden bg-white">
+              <label
+                htmlFor="profilePic"
+                className="cursor-pointer w-full h-full"
+                onMouseOver={() => setShowImageSizeWarning(true)}
+                onMouseOut={() => setShowImageSizeWarning(false)}
+              >
+                <div className="w-full h-full flex justify-center items-center">
+                  <img
+                    src={userDetails.profilePic || RegisterSugarLogo}
+                    alt="Sugar Logo"
+                    className="rounded-full object-cover w-full h-full"
+                  />
                 </div>
-                <input
-                  type="file"
-                  id="profilePic"
-                  name="profilePic"
-                  className="hidden"
-                  onChange={handleInputChange}
-                />
-              </form>
-            </label>
+                <form>
+                  <div className="text-xs flex justify-center items-center w-full pb-3 bg-slate-200 absolute bottom-0 left-0 text-black rounded-full">
+                    Upload Photo
+                  </div>
+                  <input
+                    type="file"
+                    id="profilePic"
+                    name="profilePic"
+                    className="hidden"
+                    onChange={handleInputChange}
+                  />
+                </form>
+              </label>
+            </div>
+            <p
+              className={`text-red-500 absolute -bottom-1 text-xs ${
+                showImageSizeWarning ? "block" : "hidden"
+              }`}
+            >
+              Image size should be less than 60 kb
+            </p>
           </div>
-
           <form
             onSubmit={handleRegister}
             className="grid gap-4 w-full max-w-xl p-5 mx-auto mt-6 rounded-lg shadow-lg mb-2"

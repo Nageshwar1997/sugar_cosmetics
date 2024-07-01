@@ -10,16 +10,13 @@ import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { store } from "./store/store";
 import router from "./routes/index";
-import ContextProvider from "./contexts/ContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
     <ToastContainer position="top-center" autoClose={2000} limit={3} />
     <Provider store={store}>
-      <ContextProvider>
-        <RouterProvider router={router} />
-      </ContextProvider>
+      <RouterProvider router={router} />
     </Provider>
   </>
 );
