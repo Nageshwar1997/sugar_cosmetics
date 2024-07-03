@@ -19,7 +19,15 @@ function App() {
     <>
       <ContextProvider>
         {!shouldHideHeaderFooter && <Header />}
-        <main className="w-full min-h-full">
+        <main
+          className={`w-full min-h-full ${
+            pathname === "/"
+              ? "mt-[161px]"
+              : shouldHideHeaderFooter
+              ? "mt-0"
+              : "mt-[125px]"
+          }`}
+        >
           <Outlet />
         </main>
         {/* {!shouldHideHeaderFooter && <Footer />} */}

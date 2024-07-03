@@ -9,6 +9,7 @@ import Account from "../pages/account/Account";
 import AllProducts from "../pages/account/AllProducts";
 import AllUsers from "../pages/account/AllUsers";
 import AuthLayout from "../components/layouts/AuthLayout";
+import UploadProduct from "../pages/account/UploadProduct";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
           {
             path: "products",
             element: <AllProducts />,
+          },
+          {
+            path: "upload-product",
+            element: <UploadProduct />,
           },
           {
             path: "users",

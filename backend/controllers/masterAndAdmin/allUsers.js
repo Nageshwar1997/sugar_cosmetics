@@ -7,7 +7,7 @@ async function allUsersController(req, res) {
     const user = await userModel.findById(req.userId);
     // console.log("User : ",user.name);
 
-    if (user.role !== "MASTER") {
+    if (user.role !== "MASTER" && user.role !== "ADMIN") {
       return res.status(500).json({
         message: "Unauthorized Access",
       });

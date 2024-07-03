@@ -5,7 +5,7 @@ import TopNavbar from "./TopNavbar";
 const Header = () => {
   const { pathname } = useLocation();
   return (
-    <div className="w-full shadow-md">
+    <div className="w-full shadow-md fixed top-0 left-0 right-0">
       {/* Top Nav */}
       {pathname === "/" && <TopNavbar />}
       {/* Middle Nav */}

@@ -4,7 +4,7 @@ async function authToken(req, res, next) {
   try {
     // Token ko cookies ya headers se nikalte hain
     const token =
-      req.cookies?.token || req.headers;
+      req.cookies?.token || (req.headers && req.headers.authorization);
 
     // console.log("Token : ", token);
 

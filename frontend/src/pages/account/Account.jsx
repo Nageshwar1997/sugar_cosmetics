@@ -42,7 +42,7 @@ const Account = () => {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-200px)] grid gap-2">
+    <div className="w-full min-h-[calc(100vh-67px)] grid gap-2 p-2">
       {/* Navigation Bar */}
       <div className="w-lg h-[50px] bg-white flex items-center my-2 px-10 gap-2">
         {navigationPaths.map((path, index) => {
@@ -74,7 +74,7 @@ const Account = () => {
       </div>
       <div className="w-[97%] ml-[2.5%] mr-[0.5%] flex justify-between">
         {/* Left */}
-        <div className="w-[23.9%] h-[calc(100vh-200px)] flex flex-col justify-between items-center">
+        <div className="w-[23.9%] h-[calc(100vh-140px)] flex flex-col justify-between items-center">
           <div
             className="w-full min-h-[300px] bg-black rounded-xl overflow-y-scroll scrollbar-none"
             style={{ boxShadow: "0 2px 10px hsla(0, 0%, 51%, .1)" }}
@@ -291,7 +291,7 @@ const Account = () => {
           </div>
         </div>
         {/* Right */}
-        <main className="w-[74.66%] h-[calc(100vh-200px)] flex flex-col justify-between items-center">
+        <main className="w-[74.66%] h-[calc(100vh-140px)]">
           <Outlet />
         </main>
       </div>

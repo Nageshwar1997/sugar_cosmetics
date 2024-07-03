@@ -73,7 +73,7 @@ const MiddleNavbar = () => {
       </div>
       <div className="flex items-center space-x-1 p-1">
         <Link
-          to={`${user?._id ? "/account/users" : "/login"}`}
+          to={`${user?._id ? "/account/products" : "/login"}`}
           className="flex items-center space-x-1.5 cursor-pointer text-lg"
         >
           <div className="bg-white text-black rounded-full p-1 text-sm">
