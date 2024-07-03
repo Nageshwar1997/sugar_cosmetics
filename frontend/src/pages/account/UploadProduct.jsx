@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import categories from "../../helpers/categories";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { IoMdCloudDone } from "react-icons/io";
-import { MdOutlineDelete } from "react-icons/md";
+import { MdDelete, MdEdit, MdOutlineDelete } from "react-icons/md";
 import uploadImageCloudinary from "../../helpers/uploadImageCloudinary";
-import { MdEdit } from "react-icons/md";
+import DisplayFullImage from "../../components/account/DisplayFullImage";
 const UploadProduct = () => {
   const [product, setProduct] = useState({
     productName: "",
@@ -29,6 +28,8 @@ const UploadProduct = () => {
   });
 
   const [editingIndex, setEditingIndex] = useState(null);
+  const [showFullImage, setShowFullImage] = useState(false);
+  const [fullImage, setFullImage] = useState("");
 
   const handleProductInputChange = (e) => {
     const { name, value } = e.target;
@@ -486,17 +487,23 @@ const UploadProduct = () => {
                   </label>
                   {shade.shadeImages.map((img, index) => (
                     <div key={index} className="relative">
-                      <img
-                        src={img}
-                        alt="Shade"
-                        className="w-20 h-20 object-cover rounded-md"
-                      />
+                      <div className="w-20 h-20 p-1 bg-gray-100 rounded-md">
+                        <img
+                          src={img}
+                          alt="Shade"
+                          className="w-full h-full object-cover hover:object-scale-down transition-all mix-blend-multiply rounded-md cursor-pointer"
+                          onClick={() => {
+                            setShowFullImage(true);
+                            setFullImage(img);
+                          }}
+                        />
+                      </div>
                       <button
                         type="button"
-                        className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                        className="absolute top-0 right-0 hover:bg-red-600 hover:text-white transition-all rounded-full p-1"
                         onClick={() => handleImageDelete(index)}
                       >
-                        <MdOutlineDelete size={16} />
+                        <MdDelete size={16} />
                       </button>
                     </div>
                   ))}
@@ -569,6 +576,13 @@ const UploadProduct = () => {
               </div>
             ))}
           </div>
+          {/* Display Full Image */}
+          {showFullImage && (
+            <DisplayFullImage
+              onClose={() => setShowFullImage(false)}
+              image={fullImage}
+            />
+          )}
         </div>
       </div>
     </div>
