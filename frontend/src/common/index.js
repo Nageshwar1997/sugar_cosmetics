@@ -21,11 +21,14 @@ const SummaryApi = {
     url: `${backendUrl}/api/all-users`,
     method: "GET",
   },
-
   updateUser: {
     url: `${backendUrl}/api/update-user`,
     method: "POST",
-  }
+  },
+  uploadProduct: {
+    url: `${backendUrl}/api/upload-product`,
+    method: "POST",
+  },
 };
 
 export default SummaryApi;

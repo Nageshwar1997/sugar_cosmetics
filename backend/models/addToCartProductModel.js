@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const addToCartSchema = mongoose.Schema(
+const addToCartSchema = new mongoose.Schema(
   {
     productId: {
       ref: "product",

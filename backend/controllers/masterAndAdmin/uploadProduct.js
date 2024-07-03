@@ -10,13 +10,13 @@ async function uploadProductController(req, res) {
     }
 
     const uploadProduct = new productModel(req.body);
-    const saveProduct = await uploadProduct.save();
+    const savedProduct = await uploadProduct.save();
 
     return res.status(200).json({
       message: "Product Upload Successfully",
       error: false,
       success: true,
-      data: saveProduct,
+      data: savedProduct,
     });
   } catch (error) {
     res.status(400).json({

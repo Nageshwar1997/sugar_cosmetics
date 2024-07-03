@@ -13,7 +13,7 @@ const countAddToCartController = require("../controllers/user/countAddToCart");
 const addToCartViewController = require("../controllers/user/addToCartView");
 
 // // Product Controllers
-const uploadProductController = require("../controllers/product/uploadProduct");
+const uploadProductController = require("../controllers/masterAndAdmin/uploadProduct");
 const getProductController = require("../controllers/product/getProduct");
 const updateProductController = require("../controllers/product/updateProduct");
 const getCategoryProductController = require("../controllers/product/getCategoryProductOne");
@@ -44,13 +44,14 @@ router.get("/logout", authToken, userLogoutController);
 router.get("/all-users", authToken, allUsersController);
 router.post("/update-user", authToken, updateUserController);
 
-// Admin Panel Routes
+// Master Admin Routes ---> Product
+router.post("/upload-product", authToken, uploadProductController);
+
 
 // Remaining
 router.get("/all-orders", authToken, allOrdersController);
 
 // Product
-router.post("/upload-product", authToken, uploadProductController);
 router.get("/get-products", getProductController);
 router.post("/update-product", authToken, updateProductController);
 router.get("/get-categoryProduct", getCategoryProductController);

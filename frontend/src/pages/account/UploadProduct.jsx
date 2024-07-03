@@ -4,6 +4,9 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdDelete, MdEdit, MdOutlineDelete } from "react-icons/md";
 import uploadImageCloudinary from "../../helpers/uploadImageCloudinary";
 import DisplayFullImage from "../../components/account/DisplayFullImage";
+import SummaryApi from "../../common";
+
+import { toast } from "react-toastify";
 const UploadProduct = () => {
   const [product, setProduct] = useState({
     productName: "",
@@ -22,7 +25,7 @@ const UploadProduct = () => {
 
   const [shade, setShade] = useState({
     stock: "",
-    hexColorCode: "#000000",
+    hexColorCode: "",
     colorName: "",
     shadeImages: [],
   });
@@ -131,12 +134,30 @@ const UploadProduct = () => {
     }));
   };
 
-  const handleUploadProduct = (e) => {
+  const handleUploadProduct = async (e) => {
     e.preventDefault();
-    console.log("Product Submit", product);
+
+    const response = await fetch(SummaryApi.uploadProduct.url, {
+      method: SummaryApi.uploadProduct.method,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+
+    const responseData = await response.json();
+
+    if (responseData.success) {
+      toast.success(responseData.message);
+      console.log("Response Data", responseData);
+    }
+    if (responseData.error) {
+      toast.error(responseData.message);
+      throw new Error(responseData.error);
+    }
   };
 
-  console.log("Product", product);
   return (
     <div className="w-full h-full">
       <div className="w-full h-full flex justify-center gap-3 bg-white rounded-md">
@@ -392,9 +413,13 @@ const UploadProduct = () => {
                 className="w-full p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
               />
             </div>
+            {product.productVariants.length === 0 && (
+              <p className="text-red-500">Please add at least one variant</p>
+            )}
             <button
               type="submit"
               className="w-full bg-pink-500 text-white py-2 rounded-md mt-2"
+              disabled={product.productVariants.length === 0}
             >
               Upload Product
             </button>
@@ -444,22 +469,44 @@ const UploadProduct = () => {
                 />
               </div>
               {/* Shade Hex Color */}
-              <div className="grid gap-1 w-full">
-                <label
-                  htmlFor="hexColorCode"
-                  className="font-semibold cursor-pointer w-fit"
-                >
-                  Shade Hex Color Code :
-                </label>
-                <input
-                  type="color"
-                  id="hexColorCode"
-                  name="hexColorCode"
-                  value={shade?.hexColorCode}
-                  onChange={handleShadeChange}
-                  className="w-full h-16 p-1 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600"
-                />
+              <div className="flex w-full">
+                {/* Shade Hex Color Code Using Color Picker */}
+                <div className="grid gap-1 w-full">
+                  <label
+                    htmlFor="hexColorCode"
+                    className="font-semibold cursor-pointer w-fit"
+                  >
+                    Shade Hex Color Code :
+                  </label>
+                  <input
+                    type="color"
+                    id="hexColorCode"
+                    name="hexColorCode"
+                    value={shade?.hexColorCode}
+                    onChange={handleShadeChange}
+                    className="w-full h-14 p-1 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600"
+                  />
+                </div>
+                {/* Shade Hex Color Code Using Input */}
+                <div className="grid gap-1 w-full">
+                  <label
+                    htmlFor="colorName"
+                    className="font-semibold cursor-pointer w-fit"
+                  >
+                    HEX Color Code :
+                  </label>
+                  <input
+                    type="text"
+                    id="hexColorCode"
+                    name="hexColorCode"
+                    value={shade?.hexColorCode}
+                    onChange={handleShadeChange}
+                    placeholder=" Enter Hex Color Code"
+                    className="w-full h-14 p-1 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600"
+                  />
+                </div>
               </div>
+
               {/* Shade Images */}
               <div className="grid gap-1 w-full">
                 <label
