@@ -47,12 +47,13 @@ router.post("/update-user", authToken, updateUserController);
 // Master Admin Routes ---> Product
 router.post("/upload-product", authToken, uploadProductController);
 
+// Product
+router.get("/get-products", getProductController);
 
 // Remaining
 router.get("/all-orders", authToken, allOrdersController);
 
 // Product
-router.get("/get-products", getProductController);
 router.post("/update-product", authToken, updateProductController);
 router.get("/get-categoryProduct", getCategoryProductController);
 router.post("/category-product", getCategoryWiseProductController);

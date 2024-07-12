@@ -13,7 +13,7 @@ async function userDetailsController(req, res) {
           success: true,
         });
 
-        console.log("User", user);
+        console.log("User", user?.role, user?.firstName+" "+user?.lastName);
   } catch (error) {
     res.status(400).json({
       message: error.message || error,

@@ -7,6 +7,7 @@ import DisplayFullImage from "../../components/account/DisplayFullImage";
 import SummaryApi from "../../common";
 
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const UploadProduct = () => {
   const [product, setProduct] = useState({
     productName: "",
@@ -24,7 +25,7 @@ const UploadProduct = () => {
   });
 
   const [shade, setShade] = useState({
-    stock: "",
+    stock: "5",
     hexColorCode: "",
     colorName: "",
     shadeImages: [],
@@ -33,6 +34,8 @@ const UploadProduct = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [showFullImage, setShowFullImage] = useState(false);
   const [fullImage, setFullImage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleProductInputChange = (e) => {
     const { name, value } = e.target;
@@ -69,13 +72,18 @@ const UploadProduct = () => {
 
     if (type === "file" && files.length > 0) {
       const imageFile = files[0];
-      const cloudinaryImageUrl = await uploadImageCloudinary(imageFile);
+      try {
+        const cloudinaryImageUrl = await uploadImageCloudinary(imageFile);
 
-      if (cloudinaryImageUrl.url) {
-        setShade((prevShade) => ({
-          ...prevShade,
-          shadeImages: [...prevShade.shadeImages, cloudinaryImageUrl.url],
-        }));
+        if (cloudinaryImageUrl.url) {
+          setShade((prevShade) => ({
+            ...prevShade,
+            shadeImages: [...prevShade.shadeImages, cloudinaryImageUrl.url],
+          }));
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        // Handle error as needed
       }
     } else if (type === "text" || type === "color") {
       setShade((prevShade) => ({
@@ -151,6 +159,8 @@ const UploadProduct = () => {
     if (responseData.success) {
       toast.success(responseData.message);
       console.log("Response Data", responseData);
+
+      navigate("./products")
     }
     if (responseData.error) {
       toast.error(responseData.message);
@@ -338,7 +348,7 @@ const UploadProduct = () => {
                 onChange={handleProductInputChange}
                 rows="5"
                 placeholder=" Enter Product Description"
-                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
+                className="w-full text-sm p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
               />
             </div>
             {/* Product Description */}
@@ -356,7 +366,7 @@ const UploadProduct = () => {
                 onChange={handleProductInputChange}
                 rows="5"
                 placeholder=" Enter Product Description"
-                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
+                className="w-full text-sm p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
               />
             </div>
             {/* Product Ingredients */}
@@ -374,7 +384,7 @@ const UploadProduct = () => {
                 onChange={handleProductInputChange}
                 rows="5"
                 placeholder=" Enter Product Ingredients"
-                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
+                className="w-full text-sm p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
               />
             </div>
             {/* Product How to Use */}
@@ -392,7 +402,7 @@ const UploadProduct = () => {
                 onChange={handleProductInputChange}
                 rows="5"
                 placeholder=" Enter How to Use Instructions"
-                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
+                className="w-full text-sm p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
               />
             </div>
             {/* Additional Details */}
@@ -410,7 +420,7 @@ const UploadProduct = () => {
                 onChange={handleProductInputChange}
                 rows="5"
                 placeholder=" Enter Additional Details"
-                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
+                className="w-full text-sm p-2 border border-gray-300 bg-gray-100 rounded-md focus:outline-none focus-within:border-pink-600 resize-none scrollbar-none"
               />
             </div>
             {product.productVariants.length === 0 && (
