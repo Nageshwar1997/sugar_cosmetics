@@ -63,7 +63,7 @@ const TopNavbar = () => {
           <div className="flex justify-end items-center space-x-4 text-white h-full text-xs lg:text-sm">
             <div className="flex items-center gap-1 font-semibold cursor-pointer hover:text-pink-600">
               <FaMobileAlt />
-              <p>APP</p>
+              <p>GET APP</p>
             </div>
             <div className="flex items-center gap-1 font-semibold cursor-pointer hover:text-pink-600">
               <PiMapPinPlusBold />
