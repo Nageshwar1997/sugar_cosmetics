@@ -19,7 +19,7 @@ const TopNavbar = () => {
   const topNavLeftTextLinks = [
     "Use code: SUGAR15 to get 15% OFF on all orders!",
     "App Exclusive👉🏼use code: APP500 to get Rs.500 OFF! Only on App!",
-    "NEW LAUNCH 😱: Colour Changing Lip Oil for Rs. 599 ",
+    "NEW LAUNCH 😱: Color Changing Lip Oil for Rs. 599 ",
     "SUGAR CREAMY LEMONADE for Rs. 599",
   ];
 
@@ -41,12 +41,12 @@ const TopNavbar = () => {
       className="hidden md:block w-full h-[36px]"
       style={backgroundImageStyle}
     >
-      <div className="flex justify-center items-center w-full h-full text-xs md:text-[16px]">
-        <div className="relative flex-1 w-full h-[25px] overflow-hidden flex items-center justify-self-start text-white">
+      <div className="flex justify-center items-center w-[85%] mx-auto h-full">
+        <div className="relative flex-1 w-full h-[25px] overflow-hidden flex items-center justify-self-start text-[10px] lg:text-[15px] text-white">
           {topNavLeftTextLinks.map((link, index) => (
             <div
               key={index}
-              className={`cursor-pointer ml-[120px] absolute transition-transform duration-500 ${
+              className={`cursor-pointer absolute transition-transform duration-500 ${
                 index === currentIndex
                   ? "translate-y-0 opacity-100"
                   : translated
@@ -60,20 +60,20 @@ const TopNavbar = () => {
           ))}
         </div>
         <div className="flex-1 w-full h-[25px]">
-          <div className="flex justify-end items-center space-x-4 text-white h-full mr-[120px]">
-            <div className="flex items-center gap-1 text-md font-semibold cursor-pointer hover:text-pink-600">
+          <div className="flex justify-end items-center space-x-4 text-white h-full text-xs lg:text-sm">
+            <div className="flex items-center gap-1 font-semibold cursor-pointer hover:text-pink-600">
               <FaMobileAlt />
               <p>APP</p>
             </div>
-            <div className="flex items-center gap-1 text-md font-semibold cursor-pointer hover:text-pink-600">
+            <div className="flex items-center gap-1 font-semibold cursor-pointer hover:text-pink-600">
               <PiMapPinPlusBold />
               <p>STORE</p>
             </div>
-            <div className="flex items-center gap-1 text-md font-semibold cursor-pointer hover:text-pink-600">
+            <div className="flex items-center gap-1 font-semibold cursor-pointer hover:text-pink-600">
               <TbGiftCard />
               <p>GIFT CARD</p>
             </div>
-            <div className="flex items-center gap-1 text-md font-semibold cursor-pointer hover:text-pink-600">
+            <div className="flex items-center gap-1 font-semibold cursor-pointer hover:text-pink-600">
               <LuBadgeHelp />
               <p>HELP</p>
             </div>
